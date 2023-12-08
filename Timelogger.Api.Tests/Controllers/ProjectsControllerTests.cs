@@ -26,7 +26,7 @@ namespace Timelogger.Api.Tests.Controllers
             Assert.IsNotNull(result);
             Assert.IsInstanceOf<OkObjectResult>(result);
             var responseResult = (result as OkObjectResult)?.Value as ProjectResponse;
-            Assert.AreEqual(1, responseResult.Id);
+            Assert.AreEqual(1, responseResult?.Id);
             Assert.IsNotNull(responseResult.TimeEntries);
         }
 

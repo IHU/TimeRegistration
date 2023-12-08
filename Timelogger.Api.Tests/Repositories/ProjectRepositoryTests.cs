@@ -58,12 +58,11 @@ namespace Timelogger.Api.Tests.Repositories
 		}
 
 		[Test]
-		public async Task Given_ProjectId_Should_Throw_InvalidProjectException()
+		public void Given_ProjectId_Should_Throw_InvalidProjectException()
 		{
 			// Act & Assert
 			var invalidId = -1;
 			Assert.ThrowsAsync<InvalidProjectException>(async () => await _projectRepository.GetProjectAsync(invalidId));
-
 		}
 
 		[Test]
@@ -85,7 +84,7 @@ namespace Timelogger.Api.Tests.Repositories
 				.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
 				.Options;
 
-			var context = new Timelogger.ApiContext(options);
+			var context = new ApiContext(options);
 
 			// Act
 			var sut = new ProjectRepository(context);
@@ -121,20 +120,20 @@ namespace Timelogger.Api.Tests.Repositories
 		}
 
 		[Test]
-		public async Task Should_Create_Project_Throw_InvalidProjectException()
+		public void Should_Create_Project_Throw_InvalidProjectException()
 		{
 			//Assert
 			Assert.ThrowsAsync<InvalidProjectException>(async () => await _projectRepository.CreateProjectAsync(null));
 		}
 
 
-		private Timelogger.ApiContext CreateDbContext()
+		private ApiContext CreateDbContext()
 		{
 			var options = new DbContextOptionsBuilder<ApiContext>()
 				.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
 				.Options;
 
-			var context = new Timelogger.ApiContext(options);
+			var context = new ApiContext(options);
 			context.Projects.AddRange(ProjectsList());
 			context.SaveChangesAsync();
 
