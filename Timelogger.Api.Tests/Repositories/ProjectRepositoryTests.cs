@@ -36,6 +36,7 @@ namespace Timelogger.Api.Tests.Repositories
 			{
 				Id = 1,
 				Name = "Unit Test Project 1",
+				UserId = 1,
 				TimeEntries = new List<TimeLogEntry>()
 				{
 					new TimeLogEntry()
@@ -54,6 +55,9 @@ namespace Timelogger.Api.Tests.Repositories
 			Assert.IsNotNull(result);
 			Assert.AreEqual(expectedProject.Id, result.Id);
 			Assert.AreEqual(expectedProject.Name, result.Name);
+			Assert.AreEqual(expectedProject.Notes, result.Notes);
+			Assert.AreEqual(expectedProject.UserId, result.UserId);
+			Assert.AreEqual(expectedProject.EndDate, result.EndDate);
 			Assert.AreEqual(expectedProject.TimeEntries.Count, result.TimeEntries.Count);
 		}
 
@@ -148,6 +152,7 @@ namespace Timelogger.Api.Tests.Repositories
 				{
 					Id = 1,
 					Name = "Unit Test Project 1",
+					UserId = 1,
 					TimeEntries = new List<TimeLogEntry>()
 					{
 						new TimeLogEntry()

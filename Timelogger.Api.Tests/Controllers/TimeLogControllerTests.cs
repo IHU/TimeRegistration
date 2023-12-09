@@ -20,7 +20,7 @@ namespace Timelogger.Api.Tests.Controllers
 			var result = await sut.CreateTimeEntry(new CreateTimeLogEntryCommand()
 			{
 				Name = "Dev-1022: Baseline Created",
-				Hours = 3,
+				Hours = "3.30",
 				Description = "Description for the task",
 				EntryDate = DateTime.Now,
 				ProjectId = 1,

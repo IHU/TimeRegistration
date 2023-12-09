@@ -25,7 +25,7 @@ namespace Timelogger.Api.Tests.Features.TimeLog.CreateTimeEntry
 				Name = "DEV-1022 : Unit test",
 				Description = "Unit test started.",
 				EntryDate = DateTime.Now,
-				Hours = 5,
+				Hours = "5.30",
 				ProjectId = 1,
 				UserId = 2,
 			}, CancellationToken.None);

@@ -9,7 +9,7 @@ namespace Timelogger.Features.TimeLog.CreateTimeEntry
         public int ProjectId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public double Hours { get; set; }
+        public string Hours { get; set; }
         public DateTime EntryDate { get; set; }
     }
 }

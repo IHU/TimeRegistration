@@ -16,7 +16,7 @@ namespace Timelogger.Entities
 
 		[MaxLength(300)]
 		public string Notes { get; set; }
-		public bool IsFinished { get; set; }
+		public bool IsCompleted { get; set; }
 		public List<TimeLogEntry> TimeEntries {get;set;}
 	}
 }

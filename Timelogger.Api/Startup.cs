@@ -102,7 +102,7 @@ namespace Timelogger.Api
 				Name = "Project A",
 				EndDate = new DateTime(2024, 1, 1),
 				CustomerId = 20001,
-				IsFinished = false,
+				IsCompleted = false,
 				Notes = String.Empty,
 				UserId = 30001
 			},
@@ -112,7 +112,7 @@ namespace Timelogger.Api
 				Name = "Project B",
 				EndDate = new DateTime(2024, 2, 1),
 				CustomerId = 20002,
-				IsFinished = false,
+				IsCompleted = false,
 				Notes = String.Empty,
 				UserId = 30001,
 			},
@@ -122,7 +122,7 @@ namespace Timelogger.Api
 				Name = "Project C",
 				EndDate = new DateTime(2024, 3, 1),
 				CustomerId = 20003,
-				IsFinished = true,
+				IsCompleted = true,
 				Notes = String.Empty,
 				UserId = 30001
 			},
@@ -132,7 +132,7 @@ namespace Timelogger.Api
 				Name = "Project D",
 				EndDate = new DateTime(2024, 4, 1),
 				CustomerId = 20003,
-				IsFinished = true,
+				IsCompleted = true,
 				Notes = String.Empty,
 				UserId = 30001
 			},
@@ -142,7 +142,7 @@ namespace Timelogger.Api
 				Name = "Project E",
 				EndDate = new DateTime(2023, 10, 1),
 				CustomerId = 20003,
-				IsFinished = true,
+				IsCompleted = true,
 				Notes = String.Empty,
 				UserId = 30001
 			}
