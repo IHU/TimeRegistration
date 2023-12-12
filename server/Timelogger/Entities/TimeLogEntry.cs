@@ -5,7 +5,18 @@ namespace Timelogger.Entities
 {
     public class TimeLogEntry
     {
-        public int Id { get; set; }
+	    public TimeLogEntry()
+	    {
+	    }
+
+	    public TimeLogEntry(int id, string name, double hours)
+	    {
+		    Id = id;
+		    Name = name;
+		    Hours = hours;
+	    }
+
+	    public int Id { get; set; }
         [MaxLength(100)]
 		public string Name { get; set; }
 		public int ProjectId { get; set; }

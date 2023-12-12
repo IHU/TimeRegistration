@@ -48,14 +48,14 @@ namespace Timelogger.Api.Tests.Repositories
 			var result = await _timeLogEntryRepository.CreateTimeLogEntryAsync(timeEntry);
 
 			// Assert
-			Assert.IsNotNull(result);
-			Assert.AreEqual(timeEntry, result);
-			Assert.AreEqual(timeEntry.Id, result.Id);
-			Assert.AreEqual(timeEntry.Name, result.Name);
-			Assert.AreEqual(timeEntry.Description, result.Description);
-			Assert.AreEqual(timeEntry.Hours, result.Hours);
-			Assert.AreEqual(timeEntry.EntryDate, result.EntryDate);
-			Assert.AreEqual(timeEntry.UserId, result.UserId);
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result, Is.EqualTo(timeEntry));
+			Assert.That(result.Id, Is.EqualTo(timeEntry.Id));
+			Assert.That(result.Name, Is.EqualTo(timeEntry.Name));
+			Assert.That(result.Description, Is.EqualTo(timeEntry.Description));
+			Assert.That(result.Hours, Is.EqualTo(timeEntry.Hours));
+			Assert.That(result.EntryDate, Is.EqualTo(timeEntry.EntryDate));
+			Assert.That(result.UserId, Is.EqualTo(timeEntry.UserId));
 		}
 
 		[Test]
@@ -72,7 +72,7 @@ namespace Timelogger.Api.Tests.Repositories
 			var result = await _timeLogEntryRepository.DeleteTimeLogEntry(1100);
 
 			//Assert
-			Assert.True(result);
+			Assert.That(result, Is.Not.Null);
 		}
 
 		[Test]

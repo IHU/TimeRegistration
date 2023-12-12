@@ -6,6 +6,25 @@ namespace Timelogger.Entities
 {
 	public class Project
 	{
+		public Project()
+		{
+		}
+
+		public Project(int id, string name, int userId, List<TimeLogEntry> timeEntries)
+		{
+			Id = id;
+			Name = name;
+			UserId = userId;
+			TimeEntries = timeEntries;
+		}
+
+		public Project(int id, string name, List<TimeLogEntry> timeEntries) : this()
+		{
+			Id = id;
+			Name = name;
+			TimeEntries = timeEntries;
+		}
+
 		public int Id { get; set; }
 		
 		[MaxLength(100)]

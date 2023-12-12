@@ -23,11 +23,11 @@ namespace Timelogger.Api.Tests.Controllers
             var sut = GetSystemUnderTest();
 
             var result = await sut.GetProjectAsync(1);
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOf<OkObjectResult>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
             var responseResult = (result as OkObjectResult)?.Value as ProjectResponse;
-            Assert.AreEqual(1, responseResult?.Id);
-            Assert.IsNotNull(responseResult.TimeEntries);
+            Assert.That(responseResult?.Id, Is.EqualTo(1));
+            Assert.That(responseResult.TimeEntries, Is.Not.Null);
         }
 
         [Test]
@@ -36,11 +36,11 @@ namespace Timelogger.Api.Tests.Controllers
 	        var sut = GetSystemUnderTest();
 
 	        var result = await sut.GetAllAsync();
-	        Assert.IsNotNull(result);
-	        Assert.IsInstanceOf<OkObjectResult>(result);
+	        Assert.That(result, Is.Not.Null);
+	        Assert.That(result, Is.InstanceOf<OkObjectResult>());
 	        var responseResult = (result as OkObjectResult)?.Value as IOrderedEnumerable<ProjectResponse>;
-	        Assert.IsNotNull(responseResult);
-	        Assert.AreEqual(1, responseResult.Count());
+	        Assert.That(responseResult, Is.Not.Null);
+	        Assert.That(responseResult.Count(), Is.EqualTo(1));
         }
 
 		private ProjectsController GetSystemUnderTest()

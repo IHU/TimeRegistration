@@ -30,8 +30,8 @@ namespace Timelogger.Api.Tests.Features.TimeLog.CreateTimeEntry
 				UserId = 2,
 			}, CancellationToken.None);
 
-			Assert.IsNotNull(result);
-			Assert.AreEqual(1,result);
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result, Is.EqualTo(1));
 
 		}
 	}

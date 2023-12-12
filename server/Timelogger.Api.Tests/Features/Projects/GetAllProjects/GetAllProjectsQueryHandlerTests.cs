@@ -30,7 +30,7 @@ namespace Timelogger.Api.Tests.Features.Projects.GetAllProjects
 			var result = await sut.Handle(new GetAllProjectsQuery(), CancellationToken.None);
 
 
-			Assert.IsNotNull(result);
+			Assert.That(result, Is.Not.Null);
 
 		}
 	}

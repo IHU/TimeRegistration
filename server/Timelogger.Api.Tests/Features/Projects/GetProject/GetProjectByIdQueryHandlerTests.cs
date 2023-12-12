@@ -22,7 +22,7 @@ namespace Timelogger.Api.Tests.Features.Projects.GetProject
 
             var result = await sut.Handle(new GetProjectByIdQuery() { Id = id }, CancellationToken.None);
 
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
 
         }
 
@@ -37,7 +37,7 @@ namespace Timelogger.Api.Tests.Features.Projects.GetProject
 
             var result = await sut.Handle(null, CancellationToken.None);
 
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace Timelogger.Api.Tests.Features.Projects.GetProject
 			        Id = 12,
 		        }, CancellationToken.None);
 
-	        Assert.Null(result);
+	        Assert.That(result, Is.Null);
         }
 	}
 }

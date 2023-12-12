@@ -25,7 +25,7 @@ namespace Timelogger.Api.Tests.Features.TimeLog.DeleteTimeEntry
 			}, CancellationToken.None);
 			
 			// Assert
-			Assert.True(result);
+			Assert.That(result, Is.True);
 		}
 	}
 }

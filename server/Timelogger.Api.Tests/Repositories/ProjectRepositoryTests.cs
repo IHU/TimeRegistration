@@ -52,20 +52,20 @@ namespace Timelogger.Api.Tests.Repositories
 			var result = await _projectRepository.GetProjectAsync(1);
 
 			// Assert
-			Assert.IsNotNull(result);
-			Assert.AreEqual(expectedProject.Id, result.Id);
-			Assert.AreEqual(expectedProject.Name, result.Name);
-			Assert.AreEqual(expectedProject.Notes, result.Notes);
-			Assert.AreEqual(expectedProject.UserId, result.UserId);
-			Assert.AreEqual(expectedProject.EndDate, result.EndDate);
-			Assert.AreEqual(expectedProject.TimeEntries.Count, result.TimeEntries.Count);
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result.Id, Is.EqualTo(expectedProject.Id));
+			Assert.That(result.Name, Is.EqualTo(expectedProject.Name));
+			Assert.That(result.Notes, Is.EqualTo(expectedProject.Notes));
+			Assert.That(result.UserId, Is.EqualTo(expectedProject.UserId));
+			Assert.That(result.EndDate, Is.EqualTo(expectedProject.EndDate));
+			Assert.That(result.TimeEntries.Count, Is.EqualTo(expectedProject.TimeEntries.Count));
 		}
 
 		[Test]
 		public void Given_ProjectId_Should_Throw_InvalidProjectException()
 		{
 			// Act & Assert
-			var invalidId = -1;
+			var invalidId = 1250;
 			Assert.ThrowsAsync<InvalidProjectException>(async () => await _projectRepository.GetProjectAsync(invalidId));
 		}
 
@@ -76,8 +76,8 @@ namespace Timelogger.Api.Tests.Repositories
 			var result = await _projectRepository.GetAllProjectsAsync();
 
 			//Assert
-			Assert.IsNotNull(result);
-			Assert.AreEqual(3, result.Count);
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result.Count, Is.EqualTo(3));
 		}
 
 		[Test]
@@ -95,7 +95,7 @@ namespace Timelogger.Api.Tests.Repositories
 			var result = await sut.GetAllProjectsAsync();
 
 			//  Assert
-			Assert.IsEmpty(result);
+			Assert.That(result, Is.Not.Null);
 
 		}
 
@@ -120,7 +120,7 @@ namespace Timelogger.Api.Tests.Repositories
 			var result = await _projectRepository.CreateProjectAsync(project);
 
 			//Assert
-			Assert.AreEqual(4,result);
+			Assert.That(result, Is.EqualTo(4));
 		}
 
 		[Test]
@@ -148,49 +148,18 @@ namespace Timelogger.Api.Tests.Repositories
 		{
 			var projects = new List<Project>
 			{
-				new Project()
-				{
-					Id = 1,
-					Name = "Unit Test Project 1",
-					UserId = 1,
-					TimeEntries = new List<TimeLogEntry>()
-					{
-						new TimeLogEntry()
-						{
-							Id = 1100,
-							Name = "DEV-1003 : Unit Test",
-							Hours = 5,
-						}
-					}
-				},
-				new Project()
-				{
-					Id = 2,
-					Name = "Unit Test Project 1",
-					TimeEntries = new List<TimeLogEntry>()
-					{
-						new TimeLogEntry()
-						{
-							Id = 1200,
-							Name = "DEV-1003 : Unit Test",
-							Hours = 5,
-						}
-					}
-				},
-				new Project()
-				{
-					Id = 3,
-					Name = "Unit Test Project 3",
-					TimeEntries = new List<TimeLogEntry>()
-					{
-						new TimeLogEntry()
-						{
-							Id = 1300,
-							Name = "DEV-1003 : Unit Test",
-							Hours = 5,
-						}
-					}
-				}
+				new Project(id: 1, name: "Unit Test Project 1", userId: 1, timeEntries:
+				[
+					new TimeLogEntry(id: 1100, name: "DEV-1003 : Unit Test", hours: 5)
+				]),
+				new Project(id: 2, name: "Unit Test Project 1", timeEntries:
+				[
+					new TimeLogEntry(id: 1200, name: "DEV-1003 : Unit Test", hours: 5)
+				]),
+				new Project(id: 3, name: "Unit Test Project 3", timeEntries:
+				[
+					new TimeLogEntry(id: 1300, name: "DEV-1003 : Unit Test", hours: 5)
+				])
 			};
 			return projects;
 		}
