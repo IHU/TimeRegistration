@@ -5,21 +5,15 @@ using Timelogger.Exceptions;
 
 namespace Timelogger.Repositories
 {
-	public class TimeLogEntryRepository : ITimeLogEntryRepository
-	{
-		private readonly ApiContext _apiContext;
-
-		public TimeLogEntryRepository(ApiContext apiContext)
-		{
-			_apiContext = apiContext;
-		}
-
-		public async Task<TimeLogEntry> CreateTimeLogEntryAsync(TimeLogEntry timeLogEntry)
+	public class TimeLogEntryRepository(ApiContext apiContext) : ITimeLogEntryRepository
+    {
+        public async Task<TimeLogEntry> CreateTimeLogEntryAsync(TimeLogEntry timeLogEntry)
 		{
 			try
 			{
-				await _apiContext.TimeEntries.AddAsync(timeLogEntry);
-				await _apiContext.SaveChangesAsync();
+				await apiContext.TimeEntries.AddAsync(timeLogEntry);
+				
+                await apiContext.SaveChangesAsync();
 
 				return timeLogEntry;
 			}
@@ -33,9 +27,18 @@ namespace Timelogger.Repositories
 		{
 			try
 			{
-				var entryFound = _apiContext.Find<TimeLogEntry>(timeEntryId);
-				_apiContext.Remove(entryFound);
-				await _apiContext.SaveChangesAsync();
+                // Find the TimeLogEntry by its identifier
+                var entryFound = apiContext.Find<TimeLogEntry>(timeEntryId);
+
+                if (entryFound == null)
+                {
+                    return false;
+                }
+
+                apiContext.Remove(entryFound);
+				
+                await apiContext.SaveChangesAsync();
+
 				return true;
 			}
 			catch (Exception e)

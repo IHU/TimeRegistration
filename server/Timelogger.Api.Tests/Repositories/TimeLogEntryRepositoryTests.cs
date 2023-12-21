@@ -76,65 +76,27 @@ namespace Timelogger.Api.Tests.Repositories
 		}
 
 		[Test]
-		public async Task Given_Invalid_TimeLogEntry_Id_Should_Throw_Exception()
-		{
-			// Act
-			//Assert
-			Assert.ThrowsAsync<InvalidTimeLogEntryException>(async () => await _timeLogEntryRepository.DeleteTimeLogEntry(1000));
-		}
+		public Task Given_Invalid_TimeLogEntry_Id_Should_Throw_Exception()
+        {
+            // Arrange
+            _timeLogEntryRepository = new TimeLogEntryRepository(null);
+            // Act
 
-		//[Test]
-		//public async Task Should_Return_Empty()
-		//{
-		//	// Arrange
-		//	var options = new DbContextOptionsBuilder<ApiContext>()
-		//		.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-		//		.Options;
+            //Assert
+            Assert.ThrowsAsync<InvalidTimeLogEntryException>(async () => await _timeLogEntryRepository.DeleteTimeLogEntry(-12));
+            return Task.CompletedTask;
+        }
 
-		//	var context = new ApiContext(options);
+        [Test]
+        public async Task Given_TimeLogEntry_Id_Should_Return_False()
+        {
+            // Act
+            var result = await _timeLogEntryRepository.DeleteTimeLogEntry(2000);
+            //Assert
+            Assert.That(result, Is.False);
+        }
 
-		//	// Act
-		//	var sut = new ProjectRepository(context);
-		//	var result = await sut.GetAllProjectsAsync();
-
-		//	//  Assert
-		//	Assert.IsEmpty(result);
-
-		//}
-
-		//[Test]
-		//public async Task ShouldReturn_Create_Project()
-		//{
-		//	// Act
-		//	var project = new Project()
-		//	{
-		//		Name = "Unit Test Project 11",
-		//		TimeEntries = new List<TimeLogEntry>()
-		//			{
-		//				new TimeLogEntry()
-		//				{
-		//					Id = 1110,
-		//					Name = "DEV-1003 : Unit Test",
-		//					Hours = 5,
-		//				}
-		//			}
-		//	};
-
-		//	var result = await _timeLogEntryRepository.CreateProjectAsync(project);
-
-		//	//Assert
-		//	Assert.AreEqual(4,result);
-		//}
-
-		//[Test]
-		//public void Should_Create_Project_Throw_InvalidProjectException()
-		//{
-		//	//Assert
-		//	Assert.ThrowsAsync<InvalidProjectException>(async () => await _timeLogEntryRepository.CreateProjectAsync(null));
-		//}
-
-
-		private ApiContext CreateDbContext()
+        private ApiContext CreateDbContext()
 		{
 			var options = new DbContextOptionsBuilder<ApiContext>()
 				.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
@@ -147,52 +109,52 @@ namespace Timelogger.Api.Tests.Repositories
 			return context;
 		}
 
-		private IEnumerable<Project> ProjectsList()
+		private static IEnumerable<Project> ProjectsList()
 		{
 			var projects = new List<Project>
 			{
-				new Project()
+				new()
 				{
 					Id = 1,
 					Name = "Unit Test Project 1",
-					TimeEntries = new List<TimeLogEntry>()
-					{
-						new TimeLogEntry()
-						{
-							Id = 1100,
-							Name = "DEV-1003 : Unit Test",
-							Hours = 5,
-						}
-					}
-				},
-				new Project()
+					TimeEntries =
+                    [
+                        new TimeLogEntry()
+                        {
+                            Id = 1100,
+                            Name = "DEV-1003 : Unit Test",
+                            Hours = 5,
+                        }
+                    ]
+                },
+				new()
 				{
 					Id = 2,
 					Name = "Unit Test Project 1",
-					TimeEntries = new List<TimeLogEntry>()
-					{
-						new TimeLogEntry()
-						{
-							Id = 1200,
-							Name = "DEV-1003 : Unit Test",
-							Hours = 5,
-						}
-					}
-				},
-				new Project()
+					TimeEntries =
+                    [
+                        new TimeLogEntry
+                        {
+                            Id = 1200,
+                            Name = "DEV-1003 : Unit Test",
+                            Hours = 5,
+                        }
+                    ]
+                },
+				new()
 				{
 					Id = 3,
 					Name = "Unit Test Project 3",
-					TimeEntries = new List<TimeLogEntry>()
-					{
-						new TimeLogEntry()
-						{
-							Id = 1300,
-							Name = "DEV-1003 : Unit Test",
-							Hours = 5,
-						}
-					}
-				}
+					TimeEntries =
+                    [
+                        new TimeLogEntry()
+                        {
+                            Id = 1300,
+                            Name = "DEV-1003 : Unit Test",
+                            Hours = 5,
+                        }
+                    ]
+                }
 			};
 			return projects;
 		}
